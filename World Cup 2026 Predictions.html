@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Cup 2026 Predictions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #1f4788 0%, #2a5fa4 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 22px;
+            color: #1f4788;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .leaderboard {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .leaderboard h2 {
+            color: #1f4788;
+            font-size: 16px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 4px solid #1f4788;
+        }
+
+        .leaderboard-item.top1 {
+            border-left-color: #ffd700;
+            background: #fffacd;
+        }
+
+        .leaderboard-item.top2 {
+            border-left-color: #c0c0c0;
+            background: #f5f5f5;
+        }
+
+        .leaderboard-item.top3 {
+            border-left-color: #cd7f32;
+            background: #ffe4c4;
+        }
+
+        .player-name {
+            font-weight: 600;
+            color: #1f4788;
+            font-size: 14px;
+        }
+
+        .player-score {
+            background: #1f4788;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .match-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #1f4788;
+        }
+
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+        .match-number {
+            background: #1f4788;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .match-time {
+            color: #999;
+            font-size: 11px;
+        }
+
+        .teams {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            align-items: stretch;
+        }
+
+        .team {
+            flex: 1;
+            background: #f5f5f5;
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            color: #1f4788;
+        }
+
+        .vs {
+            color: #bbb;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 0 5px;
+        }
+
+        .score-input {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .score-input input {
+            width: 50px;
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #1f4788;
+        }
+
+        .score-input input:focus {
+            outline: none;
+            border-color: #1f4788;
+            background: #f9f9f9;
+        }
+
+        .score-dash {
+            color: #999;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .section-label {
+            font-weight: 700;
+            color: #1f4788;
+            font-size: 12px;
+            margin-top: 8px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .result-section {
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .extra-time-section {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .extra-time-section.show {
+            display: block;
+        }
+
+        .extra-time-label {
+            font-weight: 700;
+            color: #856404;
+            font-size: 13px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .btn-option {
+            flex: 1;
+            padding: 8px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            color: #1f4788;
+            transition: all 0.2s;
+        }
+
+        .btn-option.selected {
+            background: #1f4788;
+            color: white;
+            border-color: #1f4788;
+        }
+
+        .btn-option:active {
+            background: #1f4788;
+            color: white;
+            border-color: #1f4788;
+        }
+
+        .predictions-list {
+            font-size: 12px;
+            background: #f9f9f9;
+            padding: 8px;
+            border-radius: 6px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .prediction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid #eee;
+            gap: 4px;
+        }
+
+        .prediction-item:last-child {
+            border-bottom: none;
+        }
+
+        .pred-name {
+            font-weight: 600;
+            color: #1f4788;
+            flex: 0.6;
+            min-width: 50px;
+        }
+
+        .pred-score {
+            color: #666;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            font-size: 11px;
+            flex: 0.35;
+            text-align: center;
+        }
+
+        .pred-winner {
+            color: #888;
+            font-size: 10px;
+            flex: 0.35;
+            text-align: center;
+        }
+
+        .points-badge {
+            background: #1f4788;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: bold;
+            min-width: 24px;
+            text-align: center;
+            flex: 0.25;
+        }
+
+        .points-badge.two {
+            background: #28a745;
+        }
+
+        .points-badge.one {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .points-badge.zero {
+            background: #999;
+        }
+
+        .delete-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0.15;
+        }
+
+        .delete-btn:active {
+            background: #cc0000;
+        }
+
+        .add-prediction {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .add-prediction input {
+            flex: 1;
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .add-prediction button {
+            padding: 6px 12px;
+            background: #1f4788;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .add-prediction button:active {
+            background: #153458;
+        }
+
+        .draw-picker-section {
+            background: #e8f4f8;
+            border: 1px solid #b3e5fc;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            display: none;
+        }
+
+        .draw-picker-section.show {
+            display: block;
+        }
+
+        .draw-picker-label {
+            font-size: 11px;
+            color: #01579b;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .draw-winner-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .draw-winner-btn {
+            flex: 1;
+            padding: 6px;
+            border: 1px solid #b3e5fc;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            color: #01579b;
+        }
+
+        .draw-winner-btn.selected {
+            background: #01579b;
+            color: white;
+            border-color: #01579b;
+        }
+
+        .footer {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            margin-bottom: 8px;
+        }
+
+        .clear-btn {
+            padding: 8px 16px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .no-predictions {
+            color: #999;
+            font-style: italic;
+            font-size: 11px;
+            padding: 4px 0;
+        }
+
+        .scoring-info {
+            background: #e3f2fd;
+            border-left: 4px solid #1f4788;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-bottom: 10px;
+            color: #1f4788;
+        }
+
+        .scoring-info strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 18px;
+            }
+
+            .match-card {
+                padding: 12px;
+            }
+
+            .team {
+                font-size: 12px;
+            }
+
+            .leaderboard-item {
+                padding: 8px;
+            }
+
+            .player-name {
+                font-size: 12px;
+            }
+
+            .player-score {
+                font-size: 12px;
+                padding: 3px 10px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn-option {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚽ World Cup 2026</h1>
+            <p>Round of 32 Predictions & Scoring</p>
+        </div>
+
+        <div class="leaderboard" id="leaderboard">
+            <h2>🏆 Leaderboard</h2>
+            <div id="leaderboardContent"></div>
+        </div>
+
+        <div class="scoring-info">
+            <strong>📊 Scoring System:</strong>
+            ✅ Exact Score = 2 pts<br>
+            ✅ Correct Result (W/L/D) = 1 pt
+        </div>
+
+        <div id="matchesContainer"></div>
+
+        <div class="footer">
+            <p>💾 All predictions & scores saved locally</p>
+            <button class="clear-btn" onclick="if(confirm('Reset all data?')) { localStorage.removeItem('wcPredictions'); location.reload(); }">Clear All Data</button>
+        </div>
+    </div>
+
+    <script>
+        const matchups = [
+            { num: 1, team1: "South Africa", team2: "Canada", date: "Jun 28", time: "3:00 PM ET" },
+            { num: 2, team1: "Brazil", team2: "Japan", date: "Jun 29", time: "1:00 PM ET" },
+            { num: 3, team1: "Germany", team2: "Paraguay", date: "Jun 29", time: "4:30 PM ET" },
+            { num: 4, team1: "Netherlands", team2: "Morocco", date: "Jun 29", time: "9:00 PM ET" },
+            { num: 5, team1: "Ivory Coast", team2: "Norway", date: "Jun 30", time: "1:00 PM ET" },
+            { num: 6, team1: "France", team2: "Sweden", date: "Jun 30", time: "8:00 PM ET" },
+            { num: 7, team1: "Mexico", team2: "Ecuador", date: "Jun 30", time: "9:00 PM ET" },
+            { num: 8, team1: "England", team2: "DR Congo", date: "Jul 1", time: "12:00 PM ET" },
+            { num: 9, team1: "Belgium", team2: "Senegal", date: "Jul 1", time: "3:00 PM ET" },
+            { num: 10, team1: "United States", team2: "Bosnia & Herzegovina", date: "Jul 1", time: "9:00 PM ET" },
+            { num: 11, team1: "Spain", team2: "Austria", date: "Jul 1", time: "3:00 PM ET" },
+            { num: 12, team1: "Portugal", team2: "Croatia", date: "Jul 1", time: "5:30 PM ET" },
+            { num: 13, team1: "Switzerland", team2: "Algeria", date: "Jul 2", time: "1:00 PM ET" },
+            { num: 14, team1: "Colombia", team2: "Ghana", date: "Jul 2", time: "4:00 PM ET" },
+            { num: 15, team1: "Australia", team2: "Egypt", date: "Jul 2", time: "6:00 PM ET" },
+            { num: 16, team1: "Argentina", team2: "Cape Verde", date: "Jul 2", time: "8:00 PM ET" }
+        ];
+
+        function getResult(score1, score2) {
+            if (score1 > score2) return 'team1';
+            if (score1 < score2) return 'team2';
+            return 'draw';
+        }
+
+        function calculatePoints(predScore, predDrawWinner, actualScore, finalWinner) {
+            const [predT1, predT2] = predScore.split('-').map(Number);
+            const [actT1, actT2] = actualScore.split('-').map(Number);
+
+            // 2 points for exact score
+            if (predT1 === actT1 && predT2 === actT2) {
+                return 2;
+            }
+
+            // 1 point for correct final result
+            const predResult = getResult(predT1, predT2);
+            let correctResult = false;
+
+            if (predResult === 'draw' && predDrawWinner) {
+                // Prediction was a draw with a winner pick
+                if ((predDrawWinner === 'team1' && finalWinner === 'team1') || 
+                    (predDrawWinner === 'team2' && finalWinner === 'team2')) {
+                    correctResult = true;
+                }
+            } else if (predResult !== 'draw' && finalWinner === 'none') {
+                // Prediction was team1/team2 and it ended 90 min with that result
+                const actualResult = getResult(actT1, actT2);
+                if (predResult === actualResult) {
+                    correctResult = true;
+                }
+            }
+
+            return correctResult ? 1 : 0;
+        }
+
+        function saveData() {
+            const data = {};
+            matchups.forEach(m => {
+                const score1 = document.getElementById(`score1-${m.num}`).value;
+                const score2 = document.getElementById(`score2-${m.num}`).value;
+                const actualScore1 = document.getElementById(`actual1-${m.num}`).value;
+                const actualScore2 = document.getElementById(`actual2-${m.num}`).value;
+                const extraTimeType = document.getElementById(`extra-type-${m.num}`).value;
+                const extraTimeWinner = document.getElementById(`extra-winner-${m.num}`).value;
+                const predName = document.getElementById(`pred-name-${m.num}`).value;
+                const predictions = document.getElementById(`pred-list-${m.num}`).getAttribute('data-predictions') || '[]';
+                
+                data[`match-${m.num}`] = {
+                    score1,
+                    score2,
+                    actualScore1,
+                    actualScore2,
+                    extraTimeType,
+                    extraTimeWinner,
+                    predName,
+                    predictions: JSON.parse(predictions)
+                };
+            });
+            localStorage.setItem('wcPredictions', JSON.stringify(data));
+            updateLeaderboard();
+        }
+
+        function loadData() {
+            const saved = localStorage.getItem('wcPredictions');
+            if (saved) {
+                return JSON.parse(saved);
+            }
+            return {};
+        }
+
+        function deletePrediction(matchNum, idx) {
+            const predList = document.getElementById(`pred-list-${matchNum}`);
+            const predictions = JSON.parse(predList.getAttribute('data-predictions') || '[]');
+            predictions.splice(idx, 1);
+            predList.setAttribute('data-predictions', JSON.stringify(predictions));
+            renderPredictions(matchNum);
+            saveData();
+        }
+
+        function toggleDrawPicker(matchNum) {
+            const score1 = document.getElementById(`score1-${matchNum}`).value;
+            const score2 = document.getElementById(`score2-${matchNum}`).value;
+            const section = document.getElementById(`draw-picker-${matchNum}`);
+
+            if (score1 && score2 && parseInt(score1) === parseInt(score2)) {
+                section.classList.add('show');
+            } else {
+                section.classList.remove('show');
+                // Clear the selection if not a draw
+                document.getElementById(`draw-winner-${matchNum}`).value = '';
+            }
+        }
+
+        function selectDrawWinner(matchNum, team) {
+            document.querySelectorAll(`[data-draw-match="${matchNum}"]`).forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+            document.getElementById(`draw-winner-${matchNum}`).value = team;
+        }
+
+        function addPrediction(matchNum) {
+            const m = matchups.find(x => x.num === matchNum);
+            const nameInput = document.getElementById(`pred-name-${matchNum}`);
+            const score1 = document.getElementById(`score1-${matchNum}`).value;
+            const score2 = document.getElementById(`score2-${matchNum}`).value;
+            const drawWinner = document.getElementById(`draw-winner-${matchNum}`).value;
+            const name = nameInput.value.trim();
+
+            if (!name) {
+                alert('Please enter your name');
+                return;
+            }
+
+            if (!score1 || score1 === '' || !score2 || score2 === '') {
+                alert('Please enter both scores');
+                return;
+            }
+
+            // If prediction is a draw, require draw winner selection
+            if (parseInt(score1) === parseInt(score2) && !drawWinner) {
+                alert('For a draw prediction, please select who wins in extra time/penalties');
+                return;
+            }
+
+            const predList = document.getElementById(`pred-list-${matchNum}`);
+            const predictions = JSON.parse(predList.getAttribute('data-predictions') || '[]');
+            
+            const predObj = {
+                name,
+                score: `${score1}-${score2}`,
+                drawWinner: parseInt(score1) === parseInt(score2) ? drawWinner : null
+            };
+
+            predictions.push(predObj);
+            predList.setAttribute('data-predictions', JSON.stringify(predictions));
+            
+            renderPredictions(matchNum);
+            nameInput.value = '';
+            document.getElementById(`score1-${matchNum}`).value = '';
+            document.getElementById(`score2-${matchNum}`).value = '';
+            document.getElementById(`draw-winner-${matchNum}`).value = '';
+            document.getElementById(`draw-picker-${matchNum}`).classList.remove('show');
+            
+            saveData();
+        }
+
+        function toggleExtraTimeSection(matchNum) {
+            const actualScore1 = document.getElementById(`actual1-${matchNum}`).value;
+            const actualScore2 = document.getElementById(`actual2-${matchNum}`).value;
+            const section = document.getElementById(`extra-time-section-${matchNum}`);
+
+            if (actualScore1 && actualScore2 && parseInt(actualScore1) === parseInt(actualScore2)) {
+                section.classList.add('show');
+            } else {
+                section.classList.remove('show');
+            }
+        }
+
+        function selectExtraTimeOption(matchNum, type) {
+            document.querySelectorAll(`[data-match="${matchNum}"][data-type-btn]`).forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+            document.getElementById(`extra-type-${matchNum}`).value = type;
+            saveData();
+            renderPredictions(matchNum);
+        }
+
+        function selectExtraTimeWinner(matchNum, winner) {
+            document.querySelectorAll(`[data-match="${matchNum}"][data-winner-btn]`).forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+            document.getElementById(`extra-winner-${matchNum}`).value = winner;
+            saveData();
+            renderPredictions(matchNum);
+        }
+
+        function renderPredictions(matchNum) {
+            const m = matchups.find(x => x.num === matchNum);
+            const predList = document.getElementById(`pred-list-${matchNum}`);
+            const predictions = JSON.parse(predList.getAttribute('data-predictions') || '[]');
+            const actualScore1 = document.getElementById(`actual1-${matchNum}`).value;
+            const actualScore2 = document.getElementById(`actual2-${matchNum}`).value;
+            const extraTimeType = document.getElementById(`extra-type-${matchNum}`).value;
+            const extraTimeWinner = document.getElementById(`extra-winner-${matchNum}`).value;
+
+            if (predictions.length === 0) {
+                predList.innerHTML = '<div class="no-predictions">No predictions yet</div>';
+                return;
+            }
+
+            let hasResult = actualScore1 && actualScore2;
+            let finalWinner = null;
+
+            if (hasResult && parseInt(actualScore1) === parseInt(actualScore2) && extraTimeWinner) {
+                finalWinner = extraTimeWinner;
+            } else if (hasResult) {
+                finalWinner = 'none';
+            }
+
+            predList.innerHTML = predictions.map((p, idx) => {
+                let points = 0;
+                let pointsClass = 'zero';
+                
+                if (hasResult) {
+                    points = calculatePoints(p.score, p.drawWinner, `${actualScore1}-${actualScore2}`, finalWinner);
+                    if (points === 2) pointsClass = 'two';
+                    else if (points === 1) pointsClass = 'one';
+                }
+
+                const winnerText = p.drawWinner ? (p.drawWinner === 'team1' ? m.team1.substring(0, 3) : m.team2.substring(0, 3)) : '';
+
+                return `
+                    <div class="prediction-item">
+                        <span class="pred-name">${p.name}</span>
+                        <span class="pred-score">${p.score}</span>
+                        ${p.drawWinner ? `<span class="pred-winner">${winnerText}</span>` : ''}
+                        ${hasResult ? `<span class="points-badge ${pointsClass}">${points}pts</span>` : ''}
+                        <button class="delete-btn" onclick="deletePrediction(${matchNum}, ${idx})">✕</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateLeaderboard() {
+            const savedData = loadData();
+            const playerScores = {};
+
+            matchups.forEach(m => {
+                const saved = savedData[`match-${m.num}`] || {};
+                const actualScore1 = saved.actualScore1;
+                const actualScore2 = saved.actualScore2;
+                const extraTimeWinner = saved.extraTimeWinner;
+                const predictions = saved.predictions || [];
+
+                if (actualScore1 && actualScore2) {
+                    let finalWinner = null;
+                    if (parseInt(actualScore1) === parseInt(actualScore2) && extraTimeWinner) {
+                        finalWinner = extraTimeWinner;
+                    } else {
+                        finalWinner = 'none';
+                    }
+
+                    const actualScore = `${actualScore1}-${actualScore2}`;
+
+                    predictions.forEach(p => {
+                        if (!playerScores[p.name]) {
+                            playerScores[p.name] = 0;
+                        }
+                        playerScores[p.name] += calculatePoints(p.score, p.drawWinner, actualScore, finalWinner);
+                    });
+                }
+            });
+
+            const sorted = Object.entries(playerScores)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 7);
+
+            const leaderboardContent = document.getElementById('leaderboardContent');
+            
+            if (sorted.length === 0) {
+                leaderboardContent.innerHTML = '<div style="text-align: center; color: #999; font-size: 13px; padding: 20px;">Complete some match results to see the leaderboard</div>';
+                return;
+            }
+
+            leaderboardContent.innerHTML = sorted.map((entry, idx) => {
+                let className = '';
+                if (idx === 0) className = 'top1';
+                else if (idx === 1) className = 'top2';
+                else if (idx === 2) className = 'top3';
+
+                const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `#${idx + 1}`;
+
+                return `
+                    <div class="leaderboard-item ${className}">
+                        <span style="margin-right: 8px;">${medal}</span>
+                        <span class="player-name">${entry[0]}</span>
+                        <span class="player-score">${entry[1]} pts</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function initializeMatches() {
+            const container = document.getElementById('matchesContainer');
+            const savedData = loadData();
+
+            container.innerHTML = matchups.map(m => {
+                const saved = savedData[`match-${m.num}`] || {};
+                const predictions = saved.predictions || [];
+                
+                return `
+                    <div class="match-card">
+                        <div class="match-header">
+                            <span class="match-number">Match ${m.num}</span>
+                            <span class="match-time">${m.date} • ${m.time}</span>
+                        </div>
+
+                        <div class="teams">
+                            <div class="team">${m.team1}</div>
+                            <div class="vs">vs</div>
+                            <div class="team">${m.team2}</div>
+                        </div>
+
+                        <div class="section-label">📊 Predictions</div>
+                        <div class="score-input">
+                            <input type="number" id="score1-${m.num}" min="0" max="9" placeholder="0" value="${saved.score1 || ''}" onchange="toggleDrawPicker(${m.num})">
+                            <span class="score-dash">-</span>
+                            <input type="number" id="score2-${m.num}" min="0" max="9" placeholder="0" value="${saved.score2 || ''}" onchange="toggleDrawPicker(${m.num})">
+                        </div>
+
+                        <div class="draw-picker-section" id="draw-picker-${m.num}">
+                            <div class="draw-picker-label">🎯 If it's a draw, who wins in extra time/penalties?</div>
+                            <div class="draw-winner-buttons">
+                                <button class="draw-winner-btn ${saved.drawWinner === 'team1' ? 'selected' : ''}" data-draw-match="${m.num}" onclick="selectDrawWinner(${m.num}, 'team1')">${m.team1}</button>
+                                <button class="draw-winner-btn ${saved.drawWinner === 'team2' ? 'selected' : ''}" data-draw-match="${m.num}" onclick="selectDrawWinner(${m.num}, 'team2')">${m.team2}</button>
+                            </div>
+                        </div>
+
+                        <div class="add-prediction">
+                            <select id="pred-name-${m.num}" style="flex: 1; padding: 6px; border: 1px solid #ddd; border-radius: 6px; font-size: 12px;"><option value="">Select name</option><option value="Aniket" ${saved.predName === 'Aniket' ? 'selected' : ''}>Aniket</option><option value="Bikalpa" ${saved.predName === 'Bikalpa' ? 'selected' : ''}>Bikalpa</option><option value="Peter" ${saved.predName === 'Peter' ? 'selected' : ''}>Peter</option><option value="Prashant" ${saved.predName === 'Prashant' ? 'selected' : ''}>Prashant</option><option value="Raghav" ${saved.predName === 'Raghav' ? 'selected' : ''}>Raghav</option><option value="Rupesh" ${saved.predName === 'Rupesh' ? 'selected' : ''}>Rupesh</option><option value="Sajjan" ${saved.predName === 'Sajjan' ? 'selected' : ''}>Sajjan</option></select>
+                            <button onclick="addPrediction(${m.num})">Add</button>
+                        </div>
+
+                        <div class="predictions-list" id="pred-list-${m.num}" data-predictions='${JSON.stringify(predictions)}'></div>
+
+                        <div class="section-label" style="margin-top: 12px;">✅ Actual Result (90 min)</div>
+                        <div class="result-section">
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <input type="number" id="actual1-${m.num}" min="0" max="9" placeholder="0" value="${saved.actualScore1 || ''}" style="width: 50px; padding: 6px; border: 2px solid #ddd; border-radius: 6px; text-align: center; font-size: 14px; font-weight: bold;" onchange="toggleExtraTimeSection(${m.num}); saveData(); renderPredictions(${m.num});">
+                                <span style="font-weight: bold; color: #999;">-</span>
+                                <input type="number" id="actual2-${m.num}" min="0" max="9" placeholder="0" value="${saved.actualScore2 || ''}" style="width: 50px; padding: 6px; border: 2px solid #ddd; border-radius: 6px; text-align: center; font-size: 14px; font-weight: bold;" onchange="toggleExtraTimeSection(${m.num}); saveData(); renderPredictions(${m.num});">
+                            </div>
+                        </div>
+
+                        <div class="extra-time-section ${(saved.actualScore1 && saved.actualScore2 && parseInt(saved.actualScore1) === parseInt(saved.actualScore2)) ? 'show' : ''}" id="extra-time-section-${m.num}">
+                            <div class="extra-time-label">⚽ Draw at 90 min - Final Result?</div>
+                            
+                            <div style="margin-bottom: 8px;">
+                                <div style="font-size: 11px; color: #856404; margin-bottom: 6px; font-weight: 600;">How did it end?</div>
+                                <div class="button-group">
+                                    <button class="btn-option ${saved.extraTimeType === 'et' ? 'selected' : ''}" data-match="${m.num}" data-type-btn onclick="selectExtraTimeOption(${m.num}, 'et')">Extra Time</button>
+                                    <button class="btn-option ${saved.extraTimeType === 'pen' ? 'selected' : ''}" data-match="${m.num}" data-type-btn onclick="selectExtraTimeOption(${m.num}, 'pen')">Penalties</button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div style="font-size: 11px; color: #856404; margin-bottom: 6px; font-weight: 600;">Who won?</div>
+                                <div class="button-group">
+                                    <button class="btn-option ${saved.extraTimeWinner === 'team1' ? 'selected' : ''}" data-match="${m.num}" data-winner-btn onclick="selectExtraTimeWinner(${m.num}, 'team1')">${m.team1}</button>
+                                    <button class="btn-option ${saved.extraTimeWinner === 'team2' ? 'selected' : ''}" data-match="${m.num}" data-winner-btn onclick="selectExtraTimeWinner(${m.num}, 'team2')">${m.team2}</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="extra-type-${m.num}" value="${saved.extraTimeType || ''}">
+                        <input type="hidden" id="extra-winner-${m.num}" value="${saved.extraTimeWinner || ''}">
+                        <input type="hidden" id="draw-winner-${m.num}" value="${saved.drawWinner || ''}">
+                    </div>
+                `;
+            }).join('');
+
+            matchups.forEach(m => renderPredictions(m.num));
+
+            matchups.forEach(m => {
+                document.getElementById(`score1-${m.num}`).addEventListener('input', saveData);
+                document.getElementById(`score2-${m.num}`).addEventListener('input', saveData);
+                document.getElementById(`pred-name-${m.num}`).addEventListener('input', saveData);
+            });
+
+            updateLeaderboard();
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeMatches);
+    </script>
+</body>
+</html>
